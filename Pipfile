@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+gunicorn = "*"
+decorator = "*"
+brotlipy = "*"
+gevent = "*"
+Flask = "*"
+Flask-Common = "*"
+meinheld = "*"
+
+[packages.raven]
+extras = [ "flask",]

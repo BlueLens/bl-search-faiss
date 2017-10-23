@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bl-search-faiss
+  namespace: search
+  labels:
+    name: bl-search-faiss
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    name: bl-search-faiss
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bl-search-faiss
+  namespace: search
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        role: api
+        name: bl-search-faiss
+    spec:
+      containers:
+      - image: bluelens/bl-search-faiss:latest
+        name: bl-search-faiss
+        ports:
+        - containerPort: 8080
+          name: http-server
+        env:
+        - name: AWS_ACCESS_KEY
+          value: "{YOUR AWS_ACCESS_KEY}"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "{YOUR AWS_SECRET_ACCESS_KEY}"
+

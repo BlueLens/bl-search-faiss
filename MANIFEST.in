@@ -1,0 +1,2 @@
+include README.rst LICENSE AUTHORS requirements.txt
+recursive-include bl-search-faiss/templates *
