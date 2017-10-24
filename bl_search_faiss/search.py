@@ -1,12 +1,6 @@
-import numpy as np
-import time
-from util import s3
+import faiss
 
-import json
 import os
-import uuid
-from os import listdir
-from os.path import isfile, join
 
 IMG_NUM = 1408
 QUERY_IMG = 22
@@ -19,13 +13,21 @@ STR_STORAGE = "storage"
 STR_CLASS_CODE = "class_code"
 STR_NAME = "name"
 STR_FORMAT = "format"
+nq = 1
+n_candidates = 10
+
+INDEX_FILE = os.environ['INDEX_FILE']
 
 class Search:
   def __init__(self):
     print('init')
+    self.index = faiss.read_index(INDEX_FILE)
 
-  def search_imgage(self, image_file):
-    print("")
+  def query(self, vector):
+    self.index.nprobe = 1
+    result_d1, result_i1 = self.index.search(vector, n_candidates)
+    print(result_d1)
+    print(result_i1)
 
 
 
