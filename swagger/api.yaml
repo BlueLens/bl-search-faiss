@@ -1,0 +1,80 @@
+swagger: '2.0'
+info:
+  description: This is a API document for Vector search on bl-search-faiss"
+  version: 0.0.1
+  title: stylelens-search-vector
+  contact:
+    email: bluehackmaster@bluehack.net
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'vector.stylelens.io'
+basePath: /
+tags:
+  - name: search
+    description: search
+schemes:
+  - http
+paths:
+  /vectors:
+    post:
+      tags:
+      - "search"
+      summary: Query to search vector
+      description: ''
+      operationId: searchVector
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/VectorSearchRequest"
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/VectorSearchResponse'
+        400:
+          description: Invalid input
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Vector:
+    type: array
+    items:
+      type: number
+      format: float
+  VectorSearchRequest:
+    type: object
+    properties:
+      vector:
+        type: array
+        items:
+          $ref: '#definitions/Vector'
+  VectorSearchResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: "0: success, 1: fail"
+      message:
+        type: string
+      data:
+        type: object
+        properties:
+          vectors:
+            type: array
+            items:
+              $ref: '#/definitions/Vector'
+externalDocs:
+  description: Find out more about BlueLens
+  url: 'http://bluelens.io'
