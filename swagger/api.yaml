@@ -71,10 +71,11 @@ definitions:
       data:
         type: object
         properties:
-          vectors:
+          vector:
             type: array
             items:
-              $ref: '#/definitions/Vector'
+              type: integer
+              format: int32
 externalDocs:
   description: Find out more about BlueLens
   url: 'http://bluelens.io'

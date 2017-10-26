@@ -125,15 +125,16 @@ def search_vector():
     data = request.data
     json_data = json.loads(data)
     if json_data['vector'] is not None:
-      search.query(json_data['vector'])
+      res_vector = search.query(json_data['vector'])
 
     response = {}
     response['code'] = 0
     response['message'] = ""
     dic = {}
-    dic['images'] = ''
+    dic['vector'] = res_vector.tolist()
     response['data'] = dic
-    return jsonify(json_data)
+    j = json
+    return jsonify(response)
 
 @app.route('/<image_id>', methods=['GET'])
 def query_id(image_id):

@@ -1,4 +1,4 @@
-FROM bluelens/ubuntu-16.04:py3
+FROM bluelens/faiss:ubuntu16-py2
 
 #ENV WEB_CONCURRENCY=4
 
@@ -14,7 +14,8 @@ COPY . /usr/src/app
 RUN pip install --no-cache-dir gunicorn /usr/src/app
 
 ENV PYTHONPATH $PYTHONPATH:/usr/src/app/faiss
+ENV INDEX_FILE ./faiss/faiss.index
 
 EXPOSE 8080
 
-CMD ["gunicorn", "-k", "gevent", "--timeout", "200", "-b", "0.0.0.0:8080", "bl-search-faiss:app"]
+CMD ["gunicorn", "-k", "gevent", "--timeout", "200", "-b", "0.0.0.0:8080", "bl_search_faiss:app"]
