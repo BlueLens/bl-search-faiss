@@ -3,15 +3,6 @@ import numpy as np
 import os
 import logging
 
-
-NUM_CLASSES = 89
-
-STR_BUCKET = "bucket"
-STR_STORAGE = "storage"
-STR_CLASS_CODE = "class_code"
-STR_NAME = "name"
-STR_FORMAT = "format"
-
 INDEX_FILE = os.environ['INDEX_FILE']
 
 class Search:
@@ -26,6 +17,8 @@ class Search:
     xq.astype(np.float32)
     result_d, result_i = self.index.search(xq, candidates)
     print(result_i)
+    logging.debug(result_d)
+    logging.debug(result_i)
     return np.squeeze(result_i)
 
 
